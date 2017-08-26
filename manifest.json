@@ -1,0 +1,30 @@
+{
+  "name": "Copilot-chrome",
+  "description": "Copilot chrome integration support",
+  "version": "1.0",
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "permissions": [
+    "tabs",
+    "bookmarks",
+    "alarms",
+    "activeTab",
+    "history",
+    "notifications",
+    "webNavigation",
+    "webRequest"
+  ],
+  "browser_action": {
+    "default_icon": "images/default.png",
+    "default_popup": "popup.html",
+    "default_title": "Click here!"
+  },
+  "background": {
+    "scripts": [
+      "CSSSocket.js",
+      "main.js"
+    ]
+  },
+  "manifest_version": 2
+}
