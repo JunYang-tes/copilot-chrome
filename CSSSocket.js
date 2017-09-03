@@ -1,4 +1,4 @@
-//Client Serives Provider WebSocket
+//Client Serives Support WebSocket
 class CSSSocket {
   constructor(url, reconnectDelay, stateChange, provider) {
     const connect = () => {
@@ -12,15 +12,15 @@ class CSSSocket {
       this.ws.addEventListener('message', async (event) => {
         let msg = event.data
         let callInfo = JSON.parse(msg)
-        let { seq, args } = callInfo.data
+        let { seq, args, method } = callInfo.data
         console.log(callInfo)
-        if (callInfo.event in provider) {
-          console.log("call", callInfo.event)
+        if (method in provider) {
+          console.log("call", method)
           let result = null;
           try {
             result = await provider[callInfo.event](...args)
             this.ws.send(JSON.stringify({
-              event: ".response",
+              event: "response",
               data: {
                 seq,
                 result
@@ -28,7 +28,7 @@ class CSSSocket {
             }))
           } catch (e) {
             this.ws.send(JSON.stringify({
-              event: ".response",
+              event: "response",
               data: {
                 seq,
                 error: e.message
