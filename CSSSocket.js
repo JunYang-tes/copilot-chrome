@@ -18,7 +18,7 @@ class CSSSocket {
           console.log("call", method)
           let result = null;
           try {
-            result = await provider[callInfo.event](...args)
+            result = await provider[method](...args)
             this.ws.send(JSON.stringify({
               event: "response",
               data: {
